@@ -1,0 +1,16 @@
+name: Check ZIP
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check ZIP contents
+        run: |
+          unzip -l lightcargo_sales_app_android_updated.zip
