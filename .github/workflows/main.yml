@@ -16,19 +16,17 @@ jobs:
           mkdir android-project
           unzip -q lightcargo_sales_app_android_updated.zip -d android-project
 
-      - name: Find Gradle project
+      - name: Find Android project
         run: |
-          GRADLEW=$(find android-project -name gradlew -type f | head -1)
-          echo "Found: $GRADLEW"
-          test -n "$GRADLEW"
-          chmod +x "$GRADLEW"
-          echo "GRADLEW=$GRADLEW" >> "$GITHUB_ENV"
-          echo "PROJECT_DIR=$(dirname "$GRADLEW")" >> "$GITHUB_ENV"
+          SETTINGS=$(find android-project -name settings.gradle -o -name settings.gradle.kts | head -1)
+          echo "Found: $SETTINGS"
+          test -n "$SETTINGS"
+          echo "PROJECT_DIR=$(dirname "$SETTINGS")" >> "$GITHUB_ENV"
 
       - name: Build APK
         run: |
           cd "$PROJECT_DIR"
-          ./gradlew assembleDebug
+          gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
