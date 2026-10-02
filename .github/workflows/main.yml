@@ -14,7 +14,7 @@ jobs:
       - name: Extract app
         run: |
           mkdir android-project
-          unzip -q lightcargo_sales_app_android_updated.zip -d android-project
+          unzip -q light cargo_sales_app_v2.zip -d android-project
 
       - name: Find Android project
         run: |
